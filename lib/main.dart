@@ -1,13 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hockey_game/game.dart';
-import 'package:hockey_game/main_menu.dart';
+import 'package:hockey_game/UI/main_menu.dart';
 
 void main() {
   runApp(const MyApp());
-  // runApp(
-  //   GameWidget(game: GlowHockeyGame()),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,20 +23,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GameWidget(
-        game: GlowHockeyGame(),
-      ),
-    );
-  }
-}
