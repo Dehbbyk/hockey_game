@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hockey_game/game.dart';
+import 'package:hockey_game/main_menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Glow Hockey',
       theme: ThemeData(
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
+      home:  MainMenuScreen(),
     );
   }
 }
