@@ -1,5 +1,7 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
@@ -70,14 +72,44 @@ class HockeyTable extends PositionComponent {
   }
 }
 
-class Puck extends CircleComponent {
-  Puck() : super(radius: 10, paint: Paint()..color = Colors.white);
+class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCallbacks {
+  Puck() : super(radius: 10, paint: Paint()
+    ..color = Colors.white) {
+    add(CircleHitbox());
+  }
+
+  Vector2 velocity = Vector2(300, 300); // Initial velocity of the puck
 
   @override
   void onGameResize(Vector2 gameSize) {
     super.onGameResize(gameSize);
     position = gameSize /
         2; // Position the puck at the center once the game size is known
+  }
+
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    position += velocity * dt;
+
+//   Bounce off the left and right edges
+    if (position.x <= 0 || position.x >= gameRef.size.x) {
+      velocity.x = -velocity.x;
+    }
+    // Bounce off the top and bottom edges
+    if (position.y <= 0 || position.y >= gameRef.size.y) {
+      velocity.y = -velocity.y;
+    }
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    if (other is Paddle) {
+      //   Reverse the direction of the puck on collision with a paddle
+      velocity.y = -velocity.y;
+    }
   }
 }
 
@@ -103,6 +135,7 @@ class Paddle extends PositionComponent with DragCallbacks {
           anchor: Anchor.center,
         ) {
     paint = Paint()..color = color; // Initialize paint with the paddle color
+    add(RectangleHitbox()); // Add hitbox for collision detection
   }
 
   @override
