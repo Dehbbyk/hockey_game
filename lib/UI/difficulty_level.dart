@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hockey_game/game_screen.dart';
+import 'package:hockey_game/UI/game_screen.dart';
+import 'package:hockey_game/UI/widgets/difficulty_button.dart';
 
 class DifficultyLevelScreen extends StatelessWidget {
+  const DifficultyLevelScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,8 +14,8 @@ class DifficultyLevelScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
                 'Select Difficulty Level',
                 style: TextStyle(
@@ -35,40 +38,6 @@ class DifficultyLevelScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => GameScreen(difficulty: difficulty)),
-    );
-  }
-}
-
-class DifficultyButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onTap;
-
-  DifficultyButton({required this.text, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: 200,
-          padding: EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
