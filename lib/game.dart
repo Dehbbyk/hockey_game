@@ -4,7 +4,7 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 
-class GlowHockeyGame extends FlameGame {
+class GlowHockeyGame extends FlameGame with HasCollisionDetection{
   @override
   Future<void> onLoad() async {
     super.onLoad();
