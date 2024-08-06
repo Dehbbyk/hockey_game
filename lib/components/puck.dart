@@ -4,7 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:hockey_game/components/paddle.dart';
-import 'package:hockey_game/game.dart';
+import 'package:hockey_game/UI/game.dart';
 
 class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCallbacks {
   Puck() : super(radius: 10, paint: Paint()

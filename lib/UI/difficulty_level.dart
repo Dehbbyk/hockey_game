@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hockey_game/UI/game_screen.dart';
 import 'package:hockey_game/UI/widgets/difficulty_button.dart';
-import 'package:hockey_game/game_screen.dart';
 
 class DifficultyLevelScreen extends StatelessWidget {
   const DifficultyLevelScreen({super.key});

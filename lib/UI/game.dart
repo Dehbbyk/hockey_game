@@ -6,9 +6,9 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 
-import 'components/hockey_table.dart';
-import 'components/paddle.dart';
-import 'components/puck.dart';
+import '../components/hockey_table.dart';
+import '../components/paddle.dart';
+import '../components/puck.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   @override

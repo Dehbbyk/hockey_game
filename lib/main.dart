@@ -1,6 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:hockey_game/game.dart';
+import 'package:hockey_game/UI/game.dart';
 import 'package:hockey_game/UI/main_menu.dart';
 
 void main() {
