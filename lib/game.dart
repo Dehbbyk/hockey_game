@@ -84,7 +84,8 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
     add(CircleHitbox());
   }
 
-  Vector2 velocity = Vector2(200, 200); // Initial velocity of the puck
+  Vector2 velocity = Vector2.zero(); // Start with zero velocity
+  bool isInitialHit = false;// Initial velocity of the puck
 
   @override
   void onGameResize(Vector2 gameSize) {
@@ -113,10 +114,16 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
     if (other is Paddle) {
-      //   Reverse the direction of the puck on collision with a paddle
-      velocity.y = -velocity.y;
-      //   Add the paddle's velocity to the puck's velocity for more realistic interaction
-      velocity += other.velocity * 0.3;
+      if (!isInitialHit) {
+        // Set initial velocity on first hit
+        velocity = Vector2(200, 200);
+        isInitialHit = true;
+      } else {
+        // Reverse the direction of the puck on collision with a paddle
+        velocity.y = -velocity.y;
+        // Add the paddle's velocity to the puck's velocity for more realistic interaction
+        velocity += other.velocity * 0.3;
+      }
     }
   }
 }
