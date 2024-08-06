@@ -1,16 +1,58 @@
-# hockey_game
+# Glow Hockey Game
 
-A new Flutter project.
+This is a simple air hockey game built using Flutter and Flame, where two players can control paddles to hit a puck back and forth.
+
+## Table of Contents
+
+- [Features](#features)
+- [Game Mechanics](#game-mechanics)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Two-player air hockey game
+- Simple and intuitive controls
+- Realistic puck and paddle interactions
+- Collision detection and response
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To get a local copy up and running, follow these steps.
 
-A few resources to get you started if this is your first Flutter project:
+### Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/glow-hockey-game.git
+   cd glow-hockey-game
+2. Install Dependencies
+   flutter pub get
+3. Ruun the game
+   flutter run
+   
+## Game Mechanics
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Puck Movement
+The puck moves with an initial velocity and bounces off the walls and paddles. 
+The velocity is affected by collisions with the paddles, which adds the paddle's velocity to the puck's velocity for a more realistic interaction.
+
+# Paddle Controls
+Players can drag their paddles vertically within a limited range. The paddles can also push the puck when they collide.
+
+## Screenshots
+
+# Main Menu
+
+
+# Game Screen
+
+## Contributing
+Contributions make the open-source community an amazing place to learn, inspire, and create. I would greatly appreciate any contributions you make.
+
+# Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
