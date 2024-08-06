@@ -28,12 +28,20 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
     super.update(dt);
     position += velocity * dt;
 
-//   Bounce off the left and right edges
-    if (position.x <= 0 || position.x >= gameRef.size.x) {
+    // Check for collisions with the edges of the screen
+    if (position.x - radius < 0) {
+      position.x = radius;
+      velocity.x = -velocity.x;
+    } else if (position.x + radius > gameRef.size.x) {
+      position.x = gameRef.size.x - radius;
       velocity.x = -velocity.x;
     }
-    // Bounce off the top and bottom edges
-    if (position.y <= 0 || position.y >= gameRef.size.y) {
+
+    if (position.y - radius < 0) {
+      position.y = radius;
+      velocity.y = -velocity.y;
+    } else if (position.y + radius > gameRef.size.y) {
+      position.y = gameRef.size.y - radius;
       velocity.y = -velocity.y;
     }
   }
