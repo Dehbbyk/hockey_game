@@ -8,7 +8,7 @@ This is a simple air hockey game built using Flutter and Flame, where two player
 - [Game Mechanics](#game-mechanics)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
