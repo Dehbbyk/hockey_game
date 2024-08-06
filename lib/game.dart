@@ -6,13 +6,16 @@ import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
 
-class GlowHockeyGame extends FlameGame with HasCollisionDetection{
+class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   @override
   Future<void> onLoad() async {
     super.onLoad();
     final hockeyTable = HockeyTable();
     add(hockeyTable);
-    add(Puck()..position = hockeyTable.center);
+
+    final puck = Puck();
+    puck.position = hockeyTable.center;
+    add(puck);
 
     add(
       Paddle(
@@ -20,25 +23,28 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection{
         minX: 0, // Left edge of the play area
         maxX: size.x - 50, // Right edge of the play area
         minY: 10, // Top edge of the play area
-        maxY: size.y - 10, // Bottom edge of the play area
-        position: Vector2(size.x / 2, size.y / 20),
+        maxY: size.y / 2 - 10, // Bottom edge of the red play area
+        position: Vector2(size.x / 2, size.y / 10),
         size: Vector2(100, 20),
+        puck: puck,
       ),
     );
 
     add(
       Paddle(
         color: Colors.blue.shade300,
-        minX: 50, // Left edge of the play area
+        minX: 0, // Left edge of the play area
         maxX: size.x - 50, // Right edge of the play area
-        minY: 0, // Top edge of the play area
-        maxY: size.y - 30, // Bottom edge of the play area
-        position: Vector2(size.x / 2, size.y / 1.03),
+        minY: size.y / 2 + 10, // Top edge of the blue play area
+        maxY: size.y - 10, // Bottom edge of the play area
+        position: Vector2(size.x / 2, size.y - size.y / 10),
         size: Vector2(100, 20),
+        puck: puck,
       ),
     );
   }
 }
+
 
 class HockeyTable extends PositionComponent {
   late Paint topPaint;
@@ -78,7 +84,7 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
     add(CircleHitbox());
   }
 
-  Vector2 velocity = Vector2(300, 300); // Initial velocity of the puck
+  Vector2 velocity = Vector2(200, 200); // Initial velocity of the puck
 
   @override
   void onGameResize(Vector2 gameSize) {
@@ -109,6 +115,8 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
     if (other is Paddle) {
       //   Reverse the direction of the puck on collision with a paddle
       velocity.y = -velocity.y;
+      //   Add the paddle's velocity to the puck's velocity for more realistic interaction
+      velocity += other.velocity * 0.3;
     }
   }
 }
@@ -119,6 +127,7 @@ class Paddle extends PositionComponent with DragCallbacks {
   final double maxX;
   final double minY;
   final double maxY;
+  final Puck puck;
   late Paint paint; // Define paint here
 
   Paddle({
@@ -129,14 +138,17 @@ class Paddle extends PositionComponent with DragCallbacks {
     required this.maxY,
     required Vector2 position,
     Vector2? size,
+    required this.puck,
   }) : super(
-          position: position,
-          size: size ?? Vector2(20, 100), // Default size of the paddle
-          anchor: Anchor.center,
-        ) {
+    position: position,
+    size: size ?? Vector2(20, 100), // Default size of the paddle
+    anchor: Anchor.center,
+  ) {
     paint = Paint()..color = color; // Initialize paint with the paddle color
     add(RectangleHitbox()); // Add hitbox for collision detection
   }
+
+  Vector2 velocity = Vector2.zero();
 
   @override
   void render(Canvas canvas) {
@@ -151,7 +163,19 @@ class Paddle extends PositionComponent with DragCallbacks {
     // Clamp the position within the allowed range
     newPosition.x = newPosition.x.clamp(minX, maxX);
     newPosition.y = newPosition.y.clamp(minY, maxY);
+    velocity = event.canvasDelta;
     position = newPosition;
+
+    // Check for collision with puck
+    if (puck.containsPoint(position + size / 2)) {
+      puck.velocity = velocity.normalized() * puck.velocity.length;
+    }
+  }
+
+  @override
+  void onDragEnd(DragEndEvent event) {
+    // Reset the velocity when the drag ends
+    velocity = Vector2.zero();
   }
 }
 
