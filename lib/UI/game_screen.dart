@@ -11,7 +11,12 @@ class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Glow Hockey - $difficulty'),
+        title: Text(
+            'Glow Hockey - $difficulty',
+          style: TextStyle(
+            color: Colors.white
+          ),
+        ),
         backgroundColor: Colors.black,
       ),
       body: GameWidget(

@@ -6,23 +6,37 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          iconSize: 30.0, // Size of the icon
-          color: Colors.white, // Color of the icon
-          padding: EdgeInsets.all(8.0), // Padding around the icon
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MainMenuScreen()),
-            );
-          },
-        ),
+        backgroundColor: Colors.black
       ),
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Image.asset('assets/images/main.jpg'), // Ensure the image is in the assets folder and listed in pubspec.yaml
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/main.jpg', // Path to your background image
+              fit: BoxFit.cover,
+            ),
+          ),
+          // Content
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'GLOW HOCKEY',
+                    style: TextStyle(
+                      fontSize: 48,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
