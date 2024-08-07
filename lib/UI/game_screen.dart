@@ -3,24 +3,17 @@ import 'package:flutter/material.dart';
 import 'game.dart';
 
 class GameScreen extends StatelessWidget {
-  final String difficulty;
+  final String? difficulty;
 
-  const GameScreen({super.key, required this.difficulty});
+  const GameScreen({super.key, this.difficulty});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-            'Glow Hockey - $difficulty',
-          style: TextStyle(
-            color: Colors.white
-          ),
+      body: SafeArea(
+        child: GameWidget(
+          game: GlowHockeyGame(),
         ),
-        backgroundColor: Colors.black,
-      ),
-      body: GameWidget(
-        game: GlowHockeyGame(),
       ),
     );
   }

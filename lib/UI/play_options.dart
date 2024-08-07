@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hockey_game/UI/difficulty_level.dart';
+import 'package:hockey_game/UI/game_screen.dart';
 import 'package:hockey_game/UI/widgets/mainmenu_button.dart';
 
 class PlayOptionsScreen extends StatelessWidget {
@@ -40,7 +41,11 @@ class PlayOptionsScreen extends StatelessWidget {
                     onTap: () => navigateToDifficulty(context)),
                 MainMenuButton(
                     text: '2 PLAYER',
-                    onTap: () => navigateToDifficulty(context)),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const GameScreen()),
+                    ),
+                )
               ],
             ),
           ),
