@@ -1,5 +1,5 @@
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
 import 'package:hockey_game/components/hockey_table.dart';
 import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
@@ -27,34 +27,41 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
 
     add(
       Paddle(
-        
-      //  color: Colors.red.shade300,
-        minX: 0, // Left edge of the play area
-        maxX: size.x - 50, // Right edge of the play area
-        minY: 10, // Top edge of the play area
-        maxY: size.y / 2 - 10, // Bottom edge of the red play area
+        //  color: Colors.red.shade300,
+        minX: 0,
+        // Left edge of the play area
+        maxX: size.x - 50,
+        // Right edge of the play area
+        minY: 10,
+        // Top edge of the play area
+        maxY: size.y / 2 - 10,
+        // Bottom edge of the red play area
         position: Vector2(size.x / 2, size.y / 10),
         size: Vector2(100, 20),
-        puck: puck, sprite: paddleSprite,
+        puck: puck,
+        sprite: paddleSprite,
       ),
     );
 
     add(
       Paddle(
         //color: Colors.blue.shade300,
-        minX: 0, // Left edge of the play area
-        maxX: size.x - 50, // Right edge of the play area
-        minY: size.y / 2 + 10, // Top edge of the blue play area
-        maxY: size.y - 10, // Bottom edge of the play area
+        minX: 0,
+        // Left edge of the play area
+        maxX: size.x - 50,
+        // Right edge of the play area
+        minY: size.y / 2 + 10,
+        // Top edge of the blue play area
+        maxY: size.y - 10,
+        // Bottom edge of the play area
         position: Vector2(size.x / 2, size.y - size.y / 10),
         size: Vector2(100, 20),
-        puck: puck, sprite: paddle2Sprite,
+        puck: puck,
+        sprite: paddle2Sprite,
       ),
     );
   }
 }
-
-
 
 // class PauseButton extends SpriteComponent with HasGameRef<GlowHockeyGame> {
 //   @override
