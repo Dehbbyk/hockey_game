@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hockey_game/main_menu.dart';
+import 'package:hockey_game/UI/main_menu.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

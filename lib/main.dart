@@ -1,13 +1,8 @@
-import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:hockey_game/game.dart';
 import 'package:hockey_game/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
-  // runApp(
-  //   GameWidget(game: GlowHockeyGame()),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,37 +17,6 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: GameWidget(
-        game: GlowHockeyGame(),
-      ),
     );
   }
 }
