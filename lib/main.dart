@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:hockey_game/game.dart';
-import 'package:hockey_game/main_menu.dart';
+import 'package:hockey_game/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,10 +21,23 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home:  MainMenuScreen(),
+      home: const SplashScreen(),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});

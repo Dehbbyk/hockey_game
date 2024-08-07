@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hockey_game/difficulty_level.dart';
 
-
 class MainMenuScreen extends StatelessWidget {
+  const MainMenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +19,8 @@ class MainMenuScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   'GLOW HOCKEY',
                   style: TextStyle(
@@ -29,12 +30,12 @@ class MainMenuScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              MainMenuButton(text: 'CHAMPIONSHIP', onTap: () => navigateToDifficulty(context)),
-              MainMenuButton(text: '1 PLAYER', onTap: () => navigateToDifficulty(context)),
-              MainMenuButton(text: '2 PLAYER', onTap: () => navigateToDifficulty(context)),
-              MainMenuButton(text: 'SETTINGS', onTap: () => navigateToDifficulty(context)),
-              MainMenuButton(text: 'MORE APPS', onTap: () => navigateToDifficulty(context)),
-              MainMenuButton(text: 'ABOUT', onTap: () => navigateToDifficulty(context)),
+              MainMenuButton(text: 'CHAMPIONSHIP', onTap: () {}),
+              MainMenuButton(
+                  text: '1 PLAYER', onTap: () => navigateToDifficulty(context)),
+              MainMenuButton(
+                  text: '2 PLAYER', onTap: () => navigateToDifficulty(context)),
+              MainMenuButton(text: 'SETTINGS', onTap: () {}),
             ],
           ),
         ),
@@ -54,7 +55,7 @@ class MainMenuButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
 
-  MainMenuButton({required this.text, required this.onTap});
+  const MainMenuButton({super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +64,8 @@ class MainMenuButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          width: 200,
-          padding: EdgeInsets.all(16.0),
+          width: 220,
+          padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.red,
             borderRadius: BorderRadius.circular(8.0),
@@ -72,7 +73,7 @@ class MainMenuButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
               ),

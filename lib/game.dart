@@ -45,7 +45,6 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   }
 }
 
-
 class HockeyTable extends PositionComponent {
   late Paint topPaint;
   late Paint bottomPaint;
@@ -78,14 +77,14 @@ class HockeyTable extends PositionComponent {
   }
 }
 
-class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCallbacks {
-  Puck() : super(radius: 10, paint: Paint()
-    ..color = Colors.white) {
+class Puck extends CircleComponent
+    with HasGameRef<GlowHockeyGame>, CollisionCallbacks {
+  Puck() : super(radius: 10, paint: Paint()..color = Colors.white) {
     add(CircleHitbox());
   }
 
   Vector2 velocity = Vector2.zero(); // Start with zero velocity
-  bool isInitialHit = false;// Initial velocity of the puck
+  bool isInitialHit = false; // Initial velocity of the puck
 
   @override
   void onGameResize(Vector2 gameSize) {
@@ -93,7 +92,6 @@ class Puck extends CircleComponent with HasGameRef<GlowHockeyGame>,CollisionCall
     position = gameSize /
         2; // Position the puck at the center once the game size is known
   }
-
 
   @override
   void update(double dt) {
@@ -147,10 +145,10 @@ class Paddle extends PositionComponent with DragCallbacks {
     Vector2? size,
     required this.puck,
   }) : super(
-    position: position,
-    size: size ?? Vector2(20, 100), // Default size of the paddle
-    anchor: Anchor.center,
-  ) {
+          position: position,
+          size: size ?? Vector2(20, 100), // Default size of the paddle
+          anchor: Anchor.center,
+        ) {
     paint = Paint()..color = color; // Initialize paint with the paddle color
     add(RectangleHitbox()); // Add hitbox for collision detection
   }

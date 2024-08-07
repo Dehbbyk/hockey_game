@@ -2,29 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:hockey_game/game_screen.dart';
 
 class DifficultyLevelScreen extends StatelessWidget {
+  const DifficultyLevelScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Text(
                 'Select Difficulty Level',
                 style: TextStyle(
-                  fontSize: 48,
+                  fontSize: 35,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            DifficultyButton(text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
-            DifficultyButton(text: 'Medium', onTap: () => navigateToGame(context, 'Medium')),
-            DifficultyButton(text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
+            DifficultyButton(
+                text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
+            DifficultyButton(
+                text: 'Medium', onTap: () => navigateToGame(context, 'Medium')),
+            DifficultyButton(
+                text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
           ],
         ),
       ),
@@ -34,7 +39,8 @@ class DifficultyLevelScreen extends StatelessWidget {
   void navigateToGame(BuildContext context, String difficulty) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => GameScreen(difficulty: difficulty)),
+      MaterialPageRoute(
+          builder: (context) => GameScreen(difficulty: difficulty)),
     );
   }
 }
@@ -43,7 +49,7 @@ class DifficultyButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
 
-  DifficultyButton({required this.text, required this.onTap});
+  const DifficultyButton({super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +59,7 @@ class DifficultyButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           width: 200,
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             color: Colors.red,
             borderRadius: BorderRadius.circular(8.0),
@@ -61,7 +67,7 @@ class DifficultyButton extends StatelessWidget {
           child: Center(
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
               ),
