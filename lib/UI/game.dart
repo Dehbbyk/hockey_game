@@ -1,14 +1,25 @@
+import 'dart:ui';
+
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame/collisions.dart';
+import 'package:hockey_game/components/background.dart';
+import 'package:hockey_game/components/game_engine.dart';
 import 'package:hockey_game/components/hockey_table.dart';
 import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
+import 'package:hockey_game/components/goal_post.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite puckSprite;
   late Sprite paddleSprite;
   late Sprite paddle2Sprite;
   late Sprite tableSprite;
+  late Sprite backgroundSprite;
+  late GameEngine gameEngine;
+
+  late Paddle player1Paddle;
+  late Paddle player2Paddle;
 
   @override
   Future<void> onLoad() async {
@@ -17,6 +28,10 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     paddleSprite = await loadSprite('PlayerRed.png');
     paddle2Sprite = await loadSprite('PlayerBlue.png');
     tableSprite = await loadSprite('Bg.png');
+    backgroundSprite = await loadSprite('BgBorder.png');
+
+    final background = Background(backgroundSprite);
+    add(background);
 
     final hockeyTable = HockeyTable(sprite: tableSprite);
     add(hockeyTable);
@@ -25,43 +40,64 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     puck.position = hockeyTable.center;
     add(puck);
 
-    add(
-      Paddle(
-        //  color: Colors.red.shade300,
-        minX: 0,
-        // Left edge of the play area
-        maxX: size.x - 50,
-        // Right edge of the play area
-        minY: 10,
-        // Top edge of the play area
-        maxY: size.y / 2 - 10,
-        // Bottom edge of the red play area
-        position: Vector2(size.x / 2, size.y / 10),
-        size: Vector2(100, 20),
-        puck: puck,
-        sprite: paddleSprite,
-      ),
+    final goalPost1 = GoalPost(
+      player: 1,
+      size: Vector2(50, 10),
+      position: Vector2(size.x / 2 - 25, 0),
+      color: const Color(0xFF000000), // Set goal post color to black
+    );
+    add(goalPost1);
+
+    final goalPost2 = GoalPost(
+      player: 2,
+      size: Vector2(50, 10),
+      position: Vector2(size.x / 2 - 25, size.y - 10),
+      color: const Color(0xFF000000), // Set goal post color to black
+    );
+    add(goalPost2);
+
+    gameEngine = GameEngine();
+    add(gameEngine);
+
+    player1Paddle = Paddle(
+      minX: 0,
+      maxX: size.x - 50,
+      minY: 10,
+      maxY: size.y / 2 - 10,
+      position: Vector2(size.x / 2, size.y / 10),
+      size: Vector2(100, 20),
+      puck: puck,
+      sprite: paddleSprite,
     );
 
-    add(
-      Paddle(
-        //color: Colors.blue.shade300,
-        minX: 0,
-        // Left edge of the play area
-        maxX: size.x - 50,
-        // Right edge of the play area
-        minY: size.y / 2 + 10,
-        // Top edge of the blue play area
-        maxY: size.y - 10,
-        // Bottom edge of the play area
-        position: Vector2(size.x / 2, size.y - size.y / 10),
-        size: Vector2(100, 20),
-        puck: puck,
-        sprite: paddle2Sprite,
-      ),
+    player2Paddle = Paddle(
+      minX: 0,
+      maxX: size.x - 50,
+      minY: size.y / 2 + 10,
+      maxY: size.y - 10,
+      position: Vector2(size.x / 2, size.y - size.y / 10),
+      size: Vector2(100, 20),
+      puck: puck,
+      sprite: paddle2Sprite,
     );
+
+    add(player1Paddle);
+    add(player2Paddle);
+
+    // Add a hitbox for the screen boundaries
+    add(ScreenHitbox());
+  }
+
+  void resetPaddles() {
+    player1Paddle.position = Vector2(size.x / 2, size.y / 10);
+    player2Paddle.position = Vector2(size.x / 2, size.y - size.y / 10);
   }
 }
+
+
+
+
+
 
 // class PauseButton extends SpriteComponent with HasGameRef<GlowHockeyGame> {
 //   @override
