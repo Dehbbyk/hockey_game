@@ -10,7 +10,7 @@ class AboutScreen extends StatelessWidget {
         children: [
           // Background image
           Image.asset(
-            'assets/images/main.jpp',
+            'assets/images/main.jpg',
             fit: BoxFit.cover,
           ),
           // Content

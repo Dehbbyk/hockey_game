@@ -10,9 +10,9 @@ class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Glow Hockey - $difficulty'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('Glow Hockey - $difficulty'),
+      // ),
       body: GameWidget(
         game: GlowHockeyGame(),
       ),

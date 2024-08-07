@@ -8,27 +8,37 @@ class DifficultyLevelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Select Difficulty Level',
-                style: TextStyle(
-                  fontSize: 48,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/main.jpg',
+              fit: BoxFit.cover,
             ),
-            DifficultyButton(text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
-            DifficultyButton(text: 'Medium', onTap: () => navigateToGame(context, 'Medium')),
-            DifficultyButton(text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
-          ],
-        ),
+          ),
+          // Content
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    'Select Difficulty Level',
+                    style: TextStyle(
+                      fontSize: 48,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DifficultyButton(text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
+                DifficultyButton(text: 'Medium', onTap: () => navigateToGame(context, 'Medium')),
+                DifficultyButton(text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
