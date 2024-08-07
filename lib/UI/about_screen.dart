@@ -6,7 +6,6 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About'),
         backgroundColor: Colors.black,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -23,7 +22,7 @@ class AboutScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.black,
       body: Center(
-        child: Image.asset('assets/image/main.jpg'), // Ensure the image is in the assets folder and listed in pubspec.yaml
+        child: Image.asset('assets/images/main.jpg'), // Ensure the image is in the assets folder and listed in pubspec.yaml
       ),
     );
   }

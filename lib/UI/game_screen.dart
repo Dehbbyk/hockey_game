@@ -12,6 +12,7 @@ class GameScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Glow Hockey - $difficulty'),
+        backgroundColor: Colors.black,
       ),
       body: GameWidget(
         game: GlowHockeyGame(),
