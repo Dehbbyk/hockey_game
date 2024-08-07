@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hockey_game/UI/main_menu.dart';
 
 class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,7 @@ class AboutScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
@@ -59,7 +61,7 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'DEVELOPED BY',
                   style: TextStyle(
@@ -68,15 +70,16 @@ class AboutScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
-                  'DEBORAH  KOLAWOLE\nPROMISE   OGUNKA\nJOEL      ACHI\nDAMILARE  AKINWALE\nQUADRI      AJAGBE',
+                const Text(
+                  'DEBORAH KOLAWOLE\nPROMISE OGUNKA\nJOEL ACHI\nDAMILARE AKINWALE\nQUADRI AJAGBE',
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   'INFO & SUPPORT',
                   style: TextStyle(
@@ -85,22 +88,24 @@ class AboutScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                const Text(
                   'https://github.com/Dehbbyk\n/hockey_game',
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
                 IconButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainMenuScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const MainMenuScreen()),
                     );
                   },
-                  icon: Icon(Icons.arrow_back),
+                  icon: const Icon(Icons.arrow_back),
                   iconSize: 30.0,
                   color: Colors.white,
                 ),
