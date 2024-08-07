@@ -65,7 +65,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       minY: 10,
       maxY: size.y / 2 - 10,
       position: Vector2(size.x / 2, size.y / 10),
-      size: Vector2(100, 20),
+      size: Vector2(50, 50),
       puck: puck,
       sprite: paddleSprite,
     );
@@ -76,7 +76,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       minY: size.y / 2 + 10,
       maxY: size.y - 10,
       position: Vector2(size.x / 2, size.y - size.y / 10),
-      size: Vector2(100, 20),
+      size: Vector2(50, 50),
       puck: puck,
       sprite: paddle2Sprite,
     );
@@ -84,8 +84,6 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     add(player1Paddle);
     add(player2Paddle);
 
-    // Add a hitbox for the screen boundaries
-    add(ScreenHitbox());
   }
 
   void resetPaddles() {
@@ -93,7 +91,6 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     player2Paddle.position = Vector2(size.x / 2, size.y - size.y / 10);
   }
 }
-
 
 
 

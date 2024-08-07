@@ -28,7 +28,7 @@ class Paddle extends SpriteComponent with DragCallbacks, CollisionCallbacks {
     size: size ?? Vector2(20, 100), // Default size of the paddle
     anchor: Anchor.center,
   ) {
-    add(RectangleHitbox()); // Add hitbox for collision detection
+    add(CircleHitbox()); // Add hitbox for collision detection
   }
 
   Vector2 velocity = Vector2.zero();
