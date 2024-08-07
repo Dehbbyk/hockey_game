@@ -16,10 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 4),
-      () => Navigator.pushReplacement(
+          () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const MainMenuScreen(),
+          builder: (context) => MainMenuScreen(),
         ),
       ),
     );
@@ -27,17 +27,29 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: Text(
-          "Glow Hockey",
-          style: TextStyle(
-            fontSize: 48,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/splash.jpg',
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          // Text
+          Center(
+            child: Text(
+              "Glow Hockey",
+              style: TextStyle(
+                fontSize: 48,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
