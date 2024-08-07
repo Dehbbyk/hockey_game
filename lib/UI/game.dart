@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/collisions.dart';
-import 'package:hockey_game/components/background.dart';
+import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/game_engine.dart';
 import 'package:hockey_game/components/hockey_table.dart';
 import 'package:hockey_game/components/paddle.dart';
@@ -30,8 +30,8 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     tableSprite = await loadSprite('Bg.png');
     backgroundSprite = await loadSprite('BgBorder.png');
 
-    final background = Background(backgroundSprite);
-    add(background);
+    final backgroundBorder = BackgroundBorder(backgroundSprite);
+    add(backgroundBorder);
 
     final hockeyTable = HockeyTable(sprite: tableSprite);
     add(hockeyTable);

@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 
-class Background extends SpriteComponent {
-  Background(Sprite sprite)
+class BackgroundBorder extends SpriteComponent {
+  BackgroundBorder(Sprite sprite)
       : super(
     sprite: sprite,
     size: Vector2(800, 600), // Set the size according to your game's dimensions
