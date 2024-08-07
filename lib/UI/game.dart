@@ -5,39 +5,50 @@ import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
+  late Sprite puckSprite;
+  late Sprite paddleSprite;
+  late Sprite paddle2Sprite;
+  late Sprite tableSprite;
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    final hockeyTable = HockeyTable();
+    puckSprite = await loadSprite('Puck.png');
+    paddleSprite = await loadSprite('PlayerRed.png');
+    paddle2Sprite = await loadSprite('PlayerBlue.png');
+    tableSprite = await loadSprite('Bg.png');
+
+    final hockeyTable = HockeyTable(sprite: tableSprite);
     add(hockeyTable);
 
-    final puck = Puck();
+    final puck = Puck(sprite: puckSprite);
     puck.position = hockeyTable.center;
     add(puck);
 
     add(
       Paddle(
-        color: Colors.red.shade300,
+        
+      //  color: Colors.red.shade300,
         minX: 0, // Left edge of the play area
         maxX: size.x - 50, // Right edge of the play area
         minY: 10, // Top edge of the play area
         maxY: size.y / 2 - 10, // Bottom edge of the red play area
         position: Vector2(size.x / 2, size.y / 10),
         size: Vector2(100, 20),
-        puck: puck,
+        puck: puck, sprite: paddleSprite,
       ),
     );
 
     add(
       Paddle(
-        color: Colors.blue.shade300,
+        //color: Colors.blue.shade300,
         minX: 0, // Left edge of the play area
         maxX: size.x - 50, // Right edge of the play area
         minY: size.y / 2 + 10, // Top edge of the blue play area
         maxY: size.y - 10, // Bottom edge of the play area
         position: Vector2(size.x / 2, size.y - size.y / 10),
         size: Vector2(100, 20),
-        puck: puck,
+        puck: puck, sprite: paddle2Sprite,
       ),
     );
   }
