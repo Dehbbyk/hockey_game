@@ -33,7 +33,7 @@ class AboutScreen extends StatelessWidget {
                 Text(
                     'ABOUT',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 25,
                     color: Colors.red.shade100,
                     fontWeight: FontWeight.bold,
                   ),
@@ -44,7 +44,7 @@ class AboutScreen extends StatelessWidget {
                     Text(
                       'VERSION',
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 15,
                         color: Colors.amberAccent,
                         fontWeight: FontWeight.bold,
                       ),
@@ -62,9 +62,58 @@ class AboutScreen extends StatelessWidget {
                 ),
                 SizedBox(height:30),
                 Text(
+                  'HOW TO PLAY GLOW HOCKEY',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.red.shade100,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '1) Select Game Mode',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '2) Set Difficulty Level',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '3) Control Your Paddle',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '4) Score Goals',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '5) Game Settings',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.amberAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height:30),
+                Text(
                   'DEVELOPED BY',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 25,
                     color: Colors.red.shade100,
                     fontWeight: FontWeight.bold,
                   ),
@@ -72,7 +121,7 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   'DEBORAH  KOLAWOLE\nPROMISE   OGUNKA\nJOEL    ACHI\nAKINWALE DAMILARE',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 15,
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                   ),
@@ -81,7 +130,7 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   'INFO & SUPPORT',
                   style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 25,
                     color: Colors.red.shade100,
                     fontWeight: FontWeight.bold,
                   ),
@@ -89,7 +138,7 @@ class AboutScreen extends StatelessWidget {
                 Text(
                   'https://github.com/Dehbbyk\n/hockey_game',
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 15,
                     color: Colors.amberAccent,
                     fontWeight: FontWeight.bold,
                   ),
