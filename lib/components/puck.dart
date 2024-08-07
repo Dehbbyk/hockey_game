@@ -10,7 +10,8 @@ class Puck extends CircleComponent
     add(CircleHitbox());
   }
 
-  Vector2 velocity = Vector2.zero(); // Start with zero velocity
+  Vector2 velocity =
+      Vector2.zero(); // Flag to indicate if the puck has been hit initially
   bool isInitialHit = false; // Initial velocity of the puck
 
   @override
@@ -52,13 +53,17 @@ class Puck extends CircleComponent
     if (other is Paddle) {
       if (!isInitialHit) {
         // Set initial velocity on first hit
-        velocity = Vector2(200, 200);
+        velocity = Vector2(200, other.velocity.y);
         isInitialHit = true;
       } else {
-        // Reverse the direction of the puck on collision with a paddle
-        velocity.y = -velocity.y;
+        // Reverse the direction of the puck on collision with a paddle/ stops overlapping
+        Vector2 direction = (position - other.position).normalized();
+        position += direction * (radius + other.size.x / 2);
+
         // Add the paddle's velocity to the puck's velocity for more realistic interaction
-        velocity += other.velocity * 0.3;
+        velocity = direction * velocity.length;
+        velocity += other.velocity *
+            10.0; //this controls the force of puk bounce from the paddle
       }
     }
   }
