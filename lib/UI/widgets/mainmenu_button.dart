@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 
 class MainMenuButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
 
-  MainMenuButton({required this.text, required this.onTap});
+  const MainMenuButton({super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +13,8 @@ class MainMenuButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          width: 200,
-          padding: const EdgeInsets.all(16.0),
+          width: 220,
+          padding: const EdgeInsets.all(13.0),
           decoration: BoxDecoration(
             color: Colors.red,
             borderRadius: BorderRadius.circular(8.0),
@@ -24,7 +23,7 @@ class MainMenuButton extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 23,
                 color: Colors.white,
               ),
             ),
