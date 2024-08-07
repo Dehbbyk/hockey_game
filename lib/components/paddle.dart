@@ -1,11 +1,9 @@
-
 import 'dart:ui';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:hockey_game/components/puck.dart';
-
 
 class Paddle extends PositionComponent with DragCallbacks {
   final Color color;
@@ -26,10 +24,10 @@ class Paddle extends PositionComponent with DragCallbacks {
     Vector2? size,
     required this.puck,
   }) : super(
-    position: position,
-    size: size ?? Vector2(20, 100), // Default size of the paddle
-    anchor: Anchor.center,
-  ) {
+          position: position,
+          size: size ?? Vector2(20, 100), // Default size of the paddle
+          anchor: Anchor.center,
+        ) {
     paint = Paint()..color = color; // Initialize paint with the paddle color
     add(RectangleHitbox()); // Add hitbox for collision detection
   }
@@ -60,6 +58,7 @@ class Paddle extends PositionComponent with DragCallbacks {
 
   @override
   void onDragEnd(DragEndEvent event) {
+    super.onDragEnd(event);
     // Reset the velocity when the drag ends
     velocity = Vector2.zero();
   }
