@@ -1,14 +1,8 @@
-import 'package:flame/collisions.dart';
-import 'package:flame/components.dart';
-import 'package:flame/events.dart';
-import 'package:flame/extensions.dart';
 import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
 import 'package:flutter/material.dart';
-
-import '../components/hockey_table.dart';
-import '../components/paddle.dart';
-import '../components/puck.dart';
+import 'package:hockey_game/components/hockey_table.dart';
+import 'package:hockey_game/components/paddle.dart';
+import 'package:hockey_game/components/puck.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite puckSprite;

@@ -4,6 +4,8 @@ import 'package:hockey_game/UI/widgets/mainmenu_button.dart';
 
 
 class MainMenuScreen extends StatelessWidget {
+  const MainMenuScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
