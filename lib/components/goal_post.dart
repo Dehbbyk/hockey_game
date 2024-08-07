@@ -1,7 +1,5 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame/palette.dart';
-import 'package:flame/game.dart';
 import 'package:flutter/painting.dart';
 import 'package:hockey_game/UI/game.dart';
 import 'package:hockey_game/components/puck.dart';

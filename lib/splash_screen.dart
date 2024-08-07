@@ -16,10 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 4),
-          () => Navigator.pushReplacement(
+      () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => MainMenuScreen(),
+          builder: (context) => const MainMenuScreen(),
         ),
       ),
     );
@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           // Text
-          Center(
+          const Center(
             child: Text(
               "Glow Hockey",
               style: TextStyle(

@@ -20,22 +20,29 @@ class DifficultyLevelScreen extends StatelessWidget {
           // Content
           Center(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Select Difficulty Level',
-                    style: TextStyle(
-                      fontSize: 48,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  child: Center(
+                    child: Text(
+                      'Select Difficulty Level',
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-                DifficultyButton(text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
-                DifficultyButton(text: 'Medium', onTap: () => navigateToGame(context, 'Medium')),
-                DifficultyButton(text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
+                DifficultyButton(
+                    text: 'Easy', onTap: () => navigateToGame(context, 'Easy')),
+                DifficultyButton(
+                    text: 'Medium',
+                    onTap: () => navigateToGame(context, 'Medium')),
+                DifficultyButton(
+                    text: 'Hard', onTap: () => navigateToGame(context, 'Hard')),
               ],
             ),
           ),
@@ -47,7 +54,8 @@ class DifficultyLevelScreen extends StatelessWidget {
   void navigateToGame(BuildContext context, String difficulty) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => GameScreen(difficulty: difficulty)),
+      MaterialPageRoute(
+          builder: (context) => GameScreen(difficulty: difficulty)),
     );
   }
 }

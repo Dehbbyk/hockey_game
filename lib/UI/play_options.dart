@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hockey_game/UI/about_screen.dart';
-import 'package:hockey_game/UI/play_options.dart';
+import 'package:hockey_game/UI/difficulty_level.dart';
 import 'package:hockey_game/UI/widgets/mainmenu_button.dart';
 
-class MainMenuScreen extends StatelessWidget {
-  const MainMenuScreen({super.key});
+class PlayOptionsScreen extends StatelessWidget {
+  const PlayOptionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class MainMenuScreen extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
-                    'GLOW HOCKEY',
+                    'PLAY OPTIONS ',
                     style: TextStyle(
                       fontSize: 48,
                       color: Colors.white,
@@ -34,16 +33,14 @@ class MainMenuScreen extends StatelessWidget {
                   ),
                 ),
                 MainMenuButton(
-                  text: 'PLAY',
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const PlayOptionsScreen()),
-                  ),
-                ),
-                MainMenuButton(text: 'SETTINGS', onTap: () {}),
+                    text: 'CHAMPIONSHIP',
+                    onTap: () => navigateToDifficulty(context)),
                 MainMenuButton(
-                    text: 'ABOUT', onTap: () => navigateToAbout(context)),
+                    text: '1 PLAYER',
+                    onTap: () => navigateToDifficulty(context)),
+                MainMenuButton(
+                    text: '2 PLAYER',
+                    onTap: () => navigateToDifficulty(context)),
               ],
             ),
           ),
@@ -52,10 +49,10 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
-  void navigateToAbout(BuildContext context) {
+  void navigateToDifficulty(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AboutScreen()),
+      MaterialPageRoute(builder: (context) => const DifficultyLevelScreen()),
     );
   }
 }

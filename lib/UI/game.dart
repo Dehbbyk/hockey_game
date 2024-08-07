@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flame/collisions.dart';
 import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/game_engine.dart';
 import 'package:hockey_game/components/hockey_table.dart';
@@ -83,7 +82,6 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
 
     add(player1Paddle);
     add(player2Paddle);
-
   }
 
   void resetPaddles() {
