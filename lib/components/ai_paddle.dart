@@ -8,6 +8,10 @@ class AIPaddle extends Paddle {
   final double stuckThreshold =
       2; // Time threshold to consider the paddle stuck
 
+  // this defines the defensive zone as the area in front of the AI's goal post
+  final double defensiveZoneHeight;
+  final double goalLine; // y-position of the goal line
+
   AIPaddle({
     required super.sprite,
     required super.minX,
@@ -17,19 +21,59 @@ class AIPaddle extends Paddle {
     required super.position,
     super.size,
     required super.puck,
-    this.aiSpeed = 300, // Default speed
-  });
+    required this.aiSpeed,
+    this.defensiveZoneHeight =
+        100, // Height of the defensive zone in front of the goal post
+  }) : goalLine = minY;
 
   @override
   void update(double dt) {
     super.update(dt);
 
+    // Define the defensive zone
+    double defensiveZoneTop = minY;
+    double defensiveZoneBottom = minY + defensiveZoneHeight;
+
+    // Check if the puck is within the defensive zone
+    bool inDefensiveZone = puck.position.y >= defensiveZoneTop &&
+        puck.position.y <= defensiveZoneBottom;
+
     // Calculate direction towards the puck
     final direction = (puck.position - position).normalized();
 
+    if (inDefensiveZone) {
+      // If the puck is in the defensive zone, stay in front of the goal post
+      if ((puck.position.y <= defensiveZoneBottom) &&
+          (position.y > defensiveZoneTop)) {
+        // Move the paddle towards the puck horizontally but slower
+        if (puck.position.x < position.x) {
+          velocity.x = -aiSpeed * 1.0; // Reduced speed
+        } else if (puck.position.x > position.x) {
+          velocity.x = aiSpeed * 1.0; // Reduced speed
+        } else {
+          velocity.x = 0; // Stay in place if perfectly aligned
+        }
+
+        // Slightly move the paddle towards the goal vertically
+        if (puck.position.y < position.y) {
+          velocity.y = -aiSpeed * 0.5; // Reduced speed
+        } else {
+          velocity.y = 0; // Stay in place vertically
+        }
+      } else {
+        // If the puck is too close to the goal, move to block it
+        velocity = (Vector2(minX + (maxX - minX) * 0.5, minY) - position)
+                .normalized() *
+            aiSpeed *
+            0.3;
+      }
+    } else {
+      // If not in defensive mode, follow the puck normally
+      velocity = direction * aiSpeed;
+    }
+
     // Move the paddle towards the puck
-    final displacement = direction * aiSpeed * dt;
-    position += displacement;
+    position += velocity * dt;
 
     // Ensure the AI paddle doesn't get too close without bouncing
     if ((puck.position - position).length < puck.size.x / 2 + size.x / 2 + 2) {
