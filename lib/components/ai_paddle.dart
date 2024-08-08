@@ -1,8 +1,13 @@
 import 'package:flame/components.dart';
 import 'package:hockey_game/components/paddle.dart';
 
-class AIPaddle extends Paddle {
+import '../UI/game.dart';
+
+class AIPaddle extends Paddle with HasGameRef<GlowHockeyGame> {
   final double aiSpeed;
+  bool shouldMove = true;
+  double activationTimer = 0;
+  double delayBeforeActivation = 1.0;
   Vector2 lastPosition = Vector2.zero();
   double stuckTimer = 0;
   final double stuckThreshold =
@@ -10,7 +15,7 @@ class AIPaddle extends Paddle {
 
   // this defines the defensive zone as the area in front of the AI's goal post
   final double defensiveZoneHeight;
-  final double goalLine; // y-position of the goal line
+  final double goalLine;
 
   AIPaddle({
     required super.sprite,
@@ -30,9 +35,32 @@ class AIPaddle extends Paddle {
   void update(double dt) {
     super.update(dt);
 
+    if (gameRef.gameEngine.lastScorer == 2) {
+      activationTimer += dt;
+      if (activationTimer >= delayBeforeActivation) {
+        shouldMove = true;
+      }
+    } else {
+      shouldMove = true;
+    }
+
+    if (shouldMove) {
+      moveToPuck(dt);
+    }
+  }
+
+  void moveToPuck(double dt) {
     // Define the defensive zone
     double defensiveZoneTop = minY;
     double defensiveZoneBottom = minY + defensiveZoneHeight;
+
+    // Check if it's the AI's turn to hit the puck or if the puck is moving
+    bool isAITurn = gameRef.gameEngine.lastScorer == 2;
+    bool puckIsMoving = puck.velocity.length > 0.1;
+
+    if (isAITurn && !puckIsMoving) {
+      return;
+    }
 
     // Check if the puck is within the defensive zone
     bool inDefensiveZone = puck.position.y >= defensiveZoneTop &&
@@ -47,18 +75,18 @@ class AIPaddle extends Paddle {
           (position.y > defensiveZoneTop)) {
         // Move the paddle towards the puck horizontally but slower
         if (puck.position.x < position.x) {
-          velocity.x = -aiSpeed * 1.0; // Reduced speed
+          velocity.x = -aiSpeed * 1.0;
         } else if (puck.position.x > position.x) {
-          velocity.x = aiSpeed * 1.0; // Reduced speed
+          velocity.x = aiSpeed * 1.0;
         } else {
-          velocity.x = 0; // Stay in place if perfectly aligned
+          velocity.x = 0;
         }
 
         // Slightly move the paddle towards the goal vertically
         if (puck.position.y < position.y) {
-          velocity.y = -aiSpeed * 0.5; // Reduced speed
+          velocity.y = -aiSpeed * 0.5;
         } else {
-          velocity.y = 0; // Stay in place vertically
+          velocity.y = 0;
         }
       } else {
         // If the puck is too close to the goal, move to block it
@@ -100,5 +128,9 @@ class AIPaddle extends Paddle {
           Vector2(minX + (maxX - minX) * 0.5, minY + (maxY - minY) * 0.5);
       stuckTimer = 0; // Reset the stuck timer
     }
+  }
+
+  void resumeMovement() {
+    shouldMove = true;
   }
 }
