@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
 import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/game_engine.dart';
 import 'package:hockey_game/components/goal_post.dart';
@@ -10,6 +11,7 @@ import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
 
 import '../components/ai_paddle.dart';
+import '../components/score_display.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite puckSprite;
@@ -18,6 +20,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite tableSprite;
   late Sprite backgroundSprite;
   late GameEngine gameEngine;
+  late ScoreDisplay scoreDisplay;
 
   late AIPaddle player1Paddle;
   late Paddle player2Paddle;
@@ -53,12 +56,18 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       player: 2,
       size: Vector2(50, 10),
       position: Vector2(size.x / 2 - 25, size.y - 10),
-      color: const Color(0xFF000000), // Set goal post color to black
+      color: const Color(0xFF000000),
     );
     add(goalPost2);
 
     gameEngine = GameEngine();
+    gameEngine.onScoreChanged = (int player1Score, int player2Score) {
+      scoreDisplay.updateText(player1Score, player2Score);
+    };
     add(gameEngine);
+
+    scoreDisplay = ScoreDisplay();
+    add(scoreDisplay);
 
     player1Paddle = AIPaddle(
       minX: 0,
@@ -69,7 +78,8 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       size: Vector2(50, 50),
       puck: puck,
       sprite: paddleSprite,
-      aiSpeed: 200, //you can adjust this for difficulty
+      //! you can adjust this for difficulty
+      aiSpeed: 200,
     );
 
     player2Paddle = Paddle(
@@ -107,25 +117,4 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
 //     // Positioning after the game size is known
 //     position = Vector2(gameSize.x - 60, 10);
 //   }
-// }
-
-// class ScoreDisplay extends TextComponent with HasGameRef<GlowHockeyGame> {
-//   @override
-//   Future<void> onLoad() async {
-//     super.onLoad();
-//     text = '0 - 0';
-//     textRenderer = TextPaint(style: TextStyle(color: Colors.white, fontSize: 24));
-//   }
-
-//   @override
-//   void onGameResize(Vector2 gameSize) {
-//     super.onGameResize(gameSize);
-//     position = Vector2(gameSize.x / 2 - textRenderer.textWidth(text) / 2, 10);
-//   }
-
-//   void updateText(String newText) {
-//     text = newText;
-//     final textWidth = textRenderer.measureTextWidth(text);
-//     position.x = (gameRef.size.x - textWidth) / 2;  // Recenter text when it changes
-// }
 // }
