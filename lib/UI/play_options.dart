@@ -43,7 +43,7 @@ class PlayOptionsScreen extends StatelessWidget {
                     text: '2 PLAYER',
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const GameScreen()),
+                      MaterialPageRoute(builder: (context) => const GameScreen(mode: "multiplayer",)),
                     ),
                 )
               ],

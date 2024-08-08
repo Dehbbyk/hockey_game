@@ -51,11 +51,12 @@ class DifficultyLevelScreen extends StatelessWidget {
     );
   }
 
-  void navigateToGame(BuildContext context, String difficulty) {
+  void navigateToGame(BuildContext context, String difficulty,
+      {String mode = "single"}) {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => GameScreen(difficulty: difficulty)),
+          builder: (context) => GameScreen(difficulty: difficulty, mode: mode)),
     );
   }
 }

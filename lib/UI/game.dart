@@ -14,6 +14,10 @@ import '../components/ai_paddle.dart';
 import '../components/score_display.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
+  final String mode;
+
+  GlowHockeyGame({required this.mode});
+
   late Sprite puckSprite;
   late Sprite paddleSprite;
   late Sprite paddle2Sprite;
@@ -22,7 +26,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late GameEngine gameEngine;
   late ScoreDisplay scoreDisplay;
 
-  late AIPaddle player1Paddle;
+  late Paddle player1Paddle;
   late Paddle player2Paddle;
 
   @override
@@ -69,18 +73,31 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     scoreDisplay = ScoreDisplay();
     add(scoreDisplay);
 
-    player1Paddle = AIPaddle(
-      minX: 0,
-      maxX: size.x - 50,
-      minY: 10,
-      maxY: size.y / 2 - 10,
-      position: Vector2(size.x / 2, size.y / 10),
-      size: Vector2(50, 50),
-      puck: puck,
-      sprite: paddleSprite,
-      //! you can adjust this for difficulty
-      aiSpeed: 200,
-    );
+    if (mode.toLowerCase() == 'single') {
+      player1Paddle = AIPaddle(
+        minX: 0,
+        maxX: size.x - 50,
+        minY: 10,
+        maxY: size.y / 2 - 10,
+        position: Vector2(size.x / 2, size.y / 10),
+        size: Vector2(50, 50),
+        puck: puck,
+        sprite: paddleSprite,
+        //! you can adjust this for difficulty
+        aiSpeed: 200,
+      );
+    } else {
+      player1Paddle = Paddle(
+        minX: 0,
+        maxX: size.x - 50,
+        minY: 10,
+        maxY: size.y / 2 - 10,
+        position: Vector2(size.x / 2, size.y / 10),
+        size: Vector2(50, 50),
+        puck: puck,
+        sprite: paddleSprite,
+      );
+    }
 
     player2Paddle = Paddle(
       minX: 0,
