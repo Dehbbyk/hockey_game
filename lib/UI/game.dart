@@ -28,6 +28,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
 
   late Paddle player1Paddle;
   late Paddle player2Paddle;
+  late Puck puck;
 
   @override
   Future<void> onLoad() async {
@@ -46,8 +47,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
 
     final hockeyTable = HockeyTable(sprite: tableSprite);
     add(hockeyTable);
-
-    final puck = Puck(sprite: puckSprite);
+    puck = Puck(sprite: puckSprite);
     puck.position = hockeyTable.center;
     add(puck);
 
@@ -120,6 +120,34 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   void resetPaddles() {
     player1Paddle.position = Vector2(size.x / 2, size.y / 10);
     player2Paddle.position = Vector2(size.x / 2, size.y - size.y / 10);
+
+    if (gameEngine.lastScorer == 2) {
+      puck.position = Vector2(size.x / 2, size.y / 2 + 10);
+      puck.velocity = Vector2(0, 0);
+      if (player1Paddle is AIPaddle) {
+        (player1Paddle as AIPaddle).shouldMove = false;
+      }
+    } else if (gameEngine.lastScorer == 1) {
+      puck.position = Vector2(size.x / 2, size.y - size.y / 2 - 10);
+      puck.velocity = Vector2(0, 0);
+      if (player1Paddle is AIPaddle) {
+        (player1Paddle as AIPaddle).shouldMove = true;
+      }
+    }
+  }
+
+  void checkPuckHitByPlayer() {
+    if (puck.velocity.y > 0 && puck.position.y > size.y / 2) {
+      if (player1Paddle is AIPaddle) {
+        (player1Paddle as AIPaddle).resumeMovement();
+      }
+    }
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    checkPuckHitByPlayer();
   }
 
   void displayWinMessage(int player) {

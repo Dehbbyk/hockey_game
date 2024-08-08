@@ -5,10 +5,12 @@ import 'package:hockey_game/UI/game.dart';
 class GameEngine extends Component with HasGameRef<GlowHockeyGame>{
   int player1Score = 0;
   int player2Score = 0;
+  int lastScorer = 0;
 
   Function(int, int)? onScoreChanged;
 
   void scoreGoal(int player) {
+    lastScorer = player;
     if (player == 1) {
       player1Score++;
     } else if (player == 2) {
