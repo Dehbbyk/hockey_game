@@ -35,7 +35,7 @@ class PlayOptionsScreen extends StatelessWidget {
                 ),
                 MainMenuButton(
                     text: 'CHAMPIONSHIP',
-                    onTap: () => navigateToDifficulty(context)),
+                    onTap: () => {}),
                 MainMenuButton(
                     text: '1 PLAYER',
                     onTap: () => navigateToDifficulty(context)),
