@@ -1,7 +1,7 @@
 import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/material.dart';
 import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/game_engine.dart';
@@ -9,7 +9,6 @@ import 'package:hockey_game/components/goal_post.dart';
 import 'package:hockey_game/components/hockey_table.dart';
 import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
-
 import '../components/ai_paddle.dart';
 import '../components/score_display.dart';
 
@@ -23,6 +22,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite paddle2Sprite;
   late Sprite tableSprite;
   late Sprite backgroundSprite;
+  late Sprite collisionEffectSprite;
   late GameEngine gameEngine;
   late ScoreDisplay scoreDisplay;
 
@@ -37,6 +37,9 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     paddle2Sprite = await loadSprite('PlayerBlue.png');
     tableSprite = await loadSprite('Bg.png');
     backgroundSprite = await loadSprite('BgBorder.png');
+    collisionEffectSprite = await loadSprite('collision_effect.jpg');
+
+    FlameAudio.audioCache.loadAll(['collision_sound.mp3', 'goal_sound.mp3']);
 
     final backgroundBorder = BackgroundBorder(backgroundSprite);
     add(backgroundBorder);
@@ -117,6 +120,26 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   void resetPaddles() {
     player1Paddle.position = Vector2(size.x / 2, size.y / 10);
     player2Paddle.position = Vector2(size.x / 2, size.y - size.y / 10);
+  }
+
+  void displayWinMessage(int player) {
+    final message = TextComponent(
+      text: 'Player $player Wins!',
+      textRenderer: TextPaint(
+        style: const TextStyle(color: Colors.black, fontSize: 48),
+      ),
+    );
+    message.position = (size - message.size) / 2;
+    add(message);
+
+    // Timer to remove the win message after 3 seconds
+    add(TimerComponent(
+      period: 3,
+      onTick: () {
+        remove(message);
+      },
+      repeat: false,
+    ));
   }
 }
 

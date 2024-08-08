@@ -1,5 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame/effects.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:hockey_game/UI/game.dart';
 import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/paddle.dart';
@@ -78,5 +80,17 @@ class Puck extends SpriteComponent
       Vector2 normal = (position - other.position).normalized();
       velocity = velocity - normal * 2 * velocity.dot(normal);
     }
+    addCollisionEffect(position);
+  }
+  void addCollisionEffect(Vector2 position) {
+  FlameAudio.play('collision_sound.mp3');  // Play collision sound
+  final effect = SpriteComponent(
+  sprite: gameRef.collisionEffectSprite,
+  size: Vector2(30, 30),
+  position: position,
+  anchor: Anchor.center,
+  );
+  gameRef.add(effect);
+  effect.add(RemoveEffect(delay: 0.5)); // Remove the effect after 0.5 seconds
   }
 }
