@@ -1,6 +1,3 @@
-
-
-import 'dart:ui';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
@@ -23,11 +20,11 @@ class Paddle extends SpriteComponent with DragCallbacks, CollisionCallbacks {
     Vector2? size,
     required this.puck,
   }) : super(
-    sprite: sprite,
-    position: position,
-    size: size ?? Vector2(20, 100), // Default size of the paddle
-    anchor: Anchor.center,
-  ) {
+          sprite: sprite,
+          position: position,
+          size: size ?? Vector2(20, 100), // Default size of the paddle
+          anchor: Anchor.center,
+        ) {
     add(CircleHitbox()); // Add hitbox for collision detection
   }
 

@@ -1,19 +1,21 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:hockey_game/UI/game.dart';
-import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/background_border.dart';
+import 'package:hockey_game/components/paddle.dart';
 
-class Puck extends SpriteComponent with HasGameRef<GlowHockeyGame>, CollisionCallbacks {
+class Puck extends SpriteComponent
+    with HasGameRef<GlowHockeyGame>, CollisionCallbacks {
   Vector2 velocity = Vector2.zero();
   bool isInitialHit = false;
+  final double maxSpeed = 500;
 
   Puck({required Sprite sprite})
       : super(
-    sprite: sprite,
-    size: Vector2(20, 20),
-    anchor: Anchor.center,
-  ) {
+          sprite: sprite,
+          size: Vector2(20, 20),
+          anchor: Anchor.center,
+        ) {
     add(CircleHitbox());
   }
 
@@ -29,6 +31,11 @@ class Puck extends SpriteComponent with HasGameRef<GlowHockeyGame>, CollisionCal
   void update(double dt) {
     super.update(dt);
     position += velocity * dt;
+
+    // Ensure the puck does not move too fast
+    if (velocity.length > maxSpeed) {
+      velocity = velocity.normalized() * maxSpeed;
+    }
 
     // Bounce off the left and right edges
     if (position.x - radius < 0) {
@@ -62,9 +69,12 @@ class Puck extends SpriteComponent with HasGameRef<GlowHockeyGame>, CollisionCal
         velocity = direction * velocity.length;
         velocity += other.velocity * 30.0;
       }
-
     } else if (other is BackgroundBorder) {
       // Handle collision with the background border
+      Vector2 normal = (position - other.position).normalized();
+      velocity = velocity - normal * 2 * velocity.dot(normal);
+    } else {
+      // Calculate the reflection vector
       Vector2 normal = (position - other.position).normalized();
       velocity = velocity - normal * 2 * velocity.dot(normal);
     }

@@ -4,10 +4,12 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:hockey_game/components/background_border.dart';
 import 'package:hockey_game/components/game_engine.dart';
+import 'package:hockey_game/components/goal_post.dart';
 import 'package:hockey_game/components/hockey_table.dart';
 import 'package:hockey_game/components/paddle.dart';
 import 'package:hockey_game/components/puck.dart';
-import 'package:hockey_game/components/goal_post.dart';
+
+import '../components/ai_paddle.dart';
 
 class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite puckSprite;
@@ -17,7 +19,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
   late Sprite backgroundSprite;
   late GameEngine gameEngine;
 
-  late Paddle player1Paddle;
+  late AIPaddle player1Paddle;
   late Paddle player2Paddle;
 
   @override
@@ -58,7 +60,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     gameEngine = GameEngine();
     add(gameEngine);
 
-    player1Paddle = Paddle(
+    player1Paddle = AIPaddle(
       minX: 0,
       maxX: size.x - 50,
       minY: 10,
@@ -67,6 +69,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       size: Vector2(50, 50),
       puck: puck,
       sprite: paddleSprite,
+      aiSpeed: 200, //you can adjust this for difficulty
     );
 
     player2Paddle = Paddle(
@@ -89,10 +92,6 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     player2Paddle.position = Vector2(size.x / 2, size.y - size.y / 10);
   }
 }
-
-
-
-
 
 // class PauseButton extends SpriteComponent with HasGameRef<GlowHockeyGame> {
 //   @override
