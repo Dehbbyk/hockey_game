@@ -50,11 +50,9 @@ class AIPaddle extends Paddle with HasGameRef<GlowHockeyGame> {
   }
 
   void moveToPuck(double dt) {
-    // Define the defensive zone
     double defensiveZoneTop = minY;
     double defensiveZoneBottom = minY + defensiveZoneHeight;
 
-    // Check if it's the AI's turn to hit the puck or if the puck is moving
     bool isAITurn = gameRef.gameEngine.lastScorer == 2;
     bool puckIsMoving = puck.velocity.length > 0.1;
 
@@ -62,15 +60,13 @@ class AIPaddle extends Paddle with HasGameRef<GlowHockeyGame> {
       return;
     }
 
-    // Check if the puck is within the defensive zone
     bool inDefensiveZone = puck.position.y >= defensiveZoneTop &&
         puck.position.y <= defensiveZoneBottom;
 
-    // Calculate direction towards the puck
     final direction = (puck.position - position).normalized();
 
     if (inDefensiveZone) {
-      // If the puck is in the defensive zone, stay in front of the goal post
+
       if ((puck.position.y <= defensiveZoneBottom) &&
           (position.y > defensiveZoneTop)) {
         // Move the paddle towards the puck horizontally but slower

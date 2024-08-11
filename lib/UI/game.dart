@@ -55,7 +55,7 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
       player: 1,
       size: Vector2(50, 10),
       position: Vector2(size.x / 2 - 25, 0),
-      color: const Color(0xFF000000), // Set goal post color to black
+      color: const Color(0xFF000000),
     );
     add(goalPost1);
 
@@ -170,19 +170,3 @@ class GlowHockeyGame extends FlameGame with HasCollisionDetection {
     ));
   }
 }
-
-// class PauseButton extends SpriteComponent with HasGameRef<GlowHockeyGame> {
-//   @override
-//   Future<void> onLoad() async {
-//     super.onLoad();
-//     sprite = await Sprite.load('pause_button.png');
-//     size = Vector2(50, 50);
-//   }
-
-//   @override
-//   void onGameResize(Vector2 gameSize) {
-//     super.onGameResize(gameSize);
-//     // Positioning after the game size is known
-//     position = Vector2(gameSize.x - 60, 10);
-//   }
-// }
